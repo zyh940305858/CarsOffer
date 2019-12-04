@@ -8,7 +8,7 @@
           :key="index1"
           @click="toDetailPage(item1.SerialID)"
         >
-          <img :src="item1.Picture" alt />
+          <img v-lazy="item1.Picture" />
           <div>
             <p class="car_name">{{item1.AliasName}}</p>
             <p class="car_money">{{item1.DealerPrice}}</p>

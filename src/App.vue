@@ -1,22 +1,21 @@
 <template>
   <div id="app">
     <router-view/>
+    <Loading v-show="loadingflag"></Loading>
   </div>
 </template>
 
 
 <script>
-// import {mapState} from 'vuex';
-// import Loading from '@/components/Loading/Loading.vue';
+import {mapState} from 'vuex';
+import Loading from '@/components/Loading/Loading.vue';
 export default {
-  // components:{
-  //   Loading
-  // },
-  // computed:{
-  //   ...mapState({
-  //     loadingflag:state => state.loading.loadingflag
-  //   })
-  // }
+  components:{
+    Loading
+  },
+  computed:{
+    ...mapState(['loadingflag'])
+  }
 }
 </script>
 

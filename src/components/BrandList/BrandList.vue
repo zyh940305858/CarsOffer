@@ -4,7 +4,7 @@
             <p @click="hideRightProup(false)">{{item.title}}</p>
             <ul>
                 <li :id="item1.MasterID" v-for="(item1,index1) in item.children" :key="index1" @click="setTypeList(item1.MasterID)">
-                    <img :src="item1.CoverPhoto" alt="">
+                    <img v-lazy="item1.CoverPhoto">
                     <span>{{item1.Name}}</span>
                 </li>
             </ul>

@@ -7,6 +7,17 @@ import home from './modules/home'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  state:{
+    loadingflag:false
+  },
+  mutations:{
+    showloading(state){
+        state.loadingflag = true;
+    },
+    hideloading(state){
+        state.loadingflag = false;
+    }
+  },
   modules:{
     home
   },
