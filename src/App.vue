@@ -4,6 +4,23 @@
   </div>
 </template>
 
+
+<script>
+// import {mapState} from 'vuex';
+// import Loading from '@/components/Loading/Loading.vue';
+export default {
+  // components:{
+  //   Loading
+  // },
+  // computed:{
+  //   ...mapState({
+  //     loadingflag:state => state.loading.loadingflag
+  //   })
+  // }
+}
+</script>
+
+
 <style lang="stylus">
 *
   margin 0

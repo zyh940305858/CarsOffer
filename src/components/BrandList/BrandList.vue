@@ -1,9 +1,9 @@
 <template>
     <div class="brand_list">
         <div v-for="(item,index) in list" :key="index" :id="item.title">
-            <p>{{item.title}}</p>
+            <p @click="hideRightProup(false)">{{item.title}}</p>
             <ul>
-                <li :id="item1.MasterID" v-for="(item1,index1) in item.children" :key="index1">
+                <li :id="item1.MasterID" v-for="(item1,index1) in item.children" :key="index1" @click="setTypeList(item1.MasterID)">
                     <img :src="item1.CoverPhoto" alt="">
                     <span>{{item1.Name}}</span>
                 </li>
@@ -13,8 +13,23 @@
 </template>
 
 <script>
+import {mapActions,mapMutations} from 'vuex'
+
 export default {
-    props:['list']
+    props:['list'],
+    methods:{
+        ...mapActions({
+            getMasterTypeList:"home/getMasterTypeList"
+        }),
+        ...mapMutations({
+            showRightProup:"home/showRightProup",
+            hideRightProup: "home/hideRightProup"
+        }),
+        setTypeList(id){
+            this.getMasterTypeList(id);
+            this.showRightProup(true);
+        }
+    }
 }
 </script>
 

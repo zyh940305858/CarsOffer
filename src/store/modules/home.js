@@ -1,8 +1,10 @@
-import { getMasterBrandList } from '@/services/index'
+import { getMasterBrandList,getMasterTypeList } from '@/services/index'
 
 const state = {
     list: [],
-    arr:[]
+    arr:[],
+    homeproupflag:false,
+    typelist:[]
 };
 
 const mutations = {
@@ -21,8 +23,16 @@ const mutations = {
                 })
             };
         });
-        console.log(newList)
         state.list = newList;
+    },
+    getTypeList(state,data){
+        state.typelist = data;
+    },
+    showRightProup(state,data){
+        state.homeproupflag = data;
+    },
+    hideRightProup(state,data){
+        state.homeproupflag = data;
     }
 };
 
@@ -31,6 +41,11 @@ const actions = {
         let res = await getMasterBrandList();
         await commit('setArr', res.data);
         await commit('setAllList', res.data);
+    },
+    async getMasterTypeList({commit},payload){
+        console.log(payload)
+        let res = await getMasterTypeList(payload);
+        await commit('getTypeList',res.data);
     }
 }
 

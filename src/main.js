@@ -9,6 +9,12 @@ import '../node_modules/normalize.css/normalize.css'
 //自适应rem
 import '../node_modules/amfe-flexible/index.js'
 
+//vant框架
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
+Vue.use(Vant);
+
 Vue.config.productionTip = false
 
 new Vue({

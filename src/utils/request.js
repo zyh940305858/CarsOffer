@@ -1,31 +1,31 @@
 import axios from 'axios';
 
 let Connection = axios.create({
-    baseURL:'http://baojia.chelun.com/',
-    timeout:1000,
+    baseURL: 'http://baojia.chelun.com/',
+    timeout: 1000,
     // headers:{}
 });
 
 
-Connection.interceptors.request.use(config =>{
+Connection.interceptors.request.use(config => {
     return config;
-},error => {
+}, error => {
     return Promise.reject(error);
 });
 
-Connection.interceptors.response.use(response =>{
-    if(response.status == 200){
+Connection.interceptors.response.use(response => {
+    if (response.status == 200) {
         return response.data;
-    }else{
+    } else {
         this.$notify({
-            type:'warning',
-            message:response.text
+            type: 'warning',
+            message: response.text
         })
     }
-},error => {
+}, error => {
     this.$notify({
-        type:'warning',
-        message:error
+        type: 'warning',
+        message: error
     })
 });
 
