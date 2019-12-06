@@ -19,9 +19,11 @@ export default {
     props:['list'],
     methods:{
         ...mapActions({
+            //抛出获取品牌列表函数
             getMasterTypeList:"home/getMasterTypeList"
         }),
         ...mapMutations({
+            //抛出展示和隐藏划出层函数
             showRightProup:"home/showRightProup",
             hideRightProup: "home/hideRightProup"
         }),
