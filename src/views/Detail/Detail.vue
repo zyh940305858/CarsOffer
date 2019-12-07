@@ -3,6 +3,7 @@
     <DetailImg :imgdata="Object.assign({},{url:cardetaildata.CoverPhoto,pic_group_count:cardetaildata.pic_group_count,SerialID:cardetaildata.SerialID})"></DetailImg>
     <DetailInfo v-if="cardetaildata.market_attribute" :infodata="Object.assign({},{dealer_price:cardetaildata.market_attribute.dealer_price,official_refer_price:cardetaildata.market_attribute.official_refer_price})"></DetailInfo>
     <DetailCarList :currentlist="currentlist" :currentindex="currentindex" :newarr="newarr"></DetailCarList>
+    <DetailBottom></DetailBottom>
   </div>
 </template>
 
@@ -11,13 +12,15 @@ import {mapState,mapActions} from 'vuex';
 import DetailImg from '@/components/Detail/DetailImg/DetailImg.vue';
 import DetailInfo from '@/components/Detail/DetailInfo/DetailInfo.vue';
 import DetailCarList from '@/components/Detail/DetailCarList/DetailCarList.vue';
+import DetailBottom from '@/components/Detail/DetailBottom/DetailBottom.vue'
 
 
 export default {
   components:{
     DetailImg,
     DetailInfo,
-    DetailCarList
+    DetailCarList,
+    DetailBottom
   },
   computed:{
     ...mapState({
