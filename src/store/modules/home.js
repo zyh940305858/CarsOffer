@@ -14,6 +14,7 @@ const mutations = {
             return item.Spelling[0]
         }))]);
     },
+
     //设置品牌数据
     setAllList(state, data) {
         let newarr = state.arr;
@@ -27,28 +28,36 @@ const mutations = {
         });
         state.list = newList;
     },
+
     //设置类型列表
-    getTypeList(state,data){
+    setTypeList(state,data){
         state.typelist = data;
     },
+
+    //展示弹出框
     showRightProup(state,data){
         state.homeproupflag = data;
     },
+    
+    //隐藏弹出框
     hideRightProup(state,data){
         state.homeproupflag = data;
     }
 };
 
 const actions = {
+    //获取到首页所有数据
     async getMasterBrandList({commit}, payload) {
         let res = await getMasterBrandList();
         await commit('setArr', res.data);
         await commit('setAllList', res.data);
     },
+
+    //获取到类型列表
     async getMasterTypeList({commit},payload){
         console.log(payload)
         let res = await getMasterTypeList(payload);
-        await commit('getTypeList',res.data);
+        await commit('setTypeList',res.data);
     }
 }
 

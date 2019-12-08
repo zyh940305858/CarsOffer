@@ -68,11 +68,12 @@ const mutations = {
         //4.聚合key相同的车款数据
         currentlist = formatlist(currentlist);
         state.currentlist = currentlist;
-        console.log(state.currentlist )
     },
+
     setCurrentIndex(state,data){
         //拿到当前下标
         state.currentindex = data;
+        
         let currentlist = [];
         //判断如果选中下标为0  或者只有两项内容
         if(state.currentindex == 0 || state.newarr.length == 1){
@@ -93,6 +94,7 @@ const actions = {
         let res = await  getMasterCarDetail(payload);
         await commit('setCarDeailData',res.data)
     },
+
     //设置当前下标及数据
     async setCurrentIndex({commit},payload){
         console.log(payload)

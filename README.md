@@ -1,19 +1,32 @@
-# cars
+# 仿车轮网项目(M站)
 
-## Project setup
-```
-npm install
-```
+## 技术栈
+    vue4.X + vue-router + vuex + Vant + Eslint + ES6 + axios
 
-### Compiles and hot-reloads for development
+## 技术点
+- 数据的重构、去重
+- 组件的封装
+- 移动端适配
+- 全局loading的实现
+- vuex的modules数据管理+
+- services请求接口管理
+- axios的二次封装
+
+## 项目运行
 ```
+git clone git@github.com:zyh940305858/CarsOffer.git
+
+npm install 或 yarn(推荐)
+
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## 功能
+- [x] 主页楼层效果
+- [x] 主页弹出框效果
+- [x] 主页侧边栏的touch滑动效果
+- [x] 汽车详情页
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+###  车轮网网站地址
+
+> http://h5.chelun.com/2017/official/#/
