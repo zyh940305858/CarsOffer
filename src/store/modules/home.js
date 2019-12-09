@@ -46,7 +46,7 @@ const actions = {
         await commit('setAllList', res.data);
     },
     async getMasterTypeList({commit},payload){
-        console.log(payload)
+        // console.log(payload)
         let res = await getMasterTypeList(payload);
         await commit('getTypeList',res.data);
     }

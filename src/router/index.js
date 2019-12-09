@@ -14,6 +14,21 @@ const routes = [
     path: '/detail',
     name: 'detail',
     component: () => import('../views/Detail/Detail.vue')
+  },
+  {
+    path: '/img',
+    name: 'img',
+    component: () => import('../views/Img/Img.vue')
+  },
+  {
+    path:'/itemlist',
+    name:'itemlist',
+    component: () => import('../components/Img/Itemlist/Itemlist.vue')
+  },
+  {
+    path:'/color',
+    name:'color',
+    component: () => import('../components/Img/Color/Color.vue')
   }
 ]
 

@@ -68,7 +68,7 @@ const mutations = {
         //4.聚合key相同的车款数据
         currentlist = formatlist(currentlist);
         state.currentlist = currentlist;
-        console.log(state.currentlist )
+        // console.log(state.currentlist )
     },
     setCurrentIndex(state,data){
         //拿到当前下标

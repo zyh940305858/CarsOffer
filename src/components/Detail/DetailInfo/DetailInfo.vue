@@ -10,7 +10,7 @@
 export default {
     props:["infodata"],
     created(){
-        console.log(this.infodata)
+        // console.log(this.infodata)
     }
 }
 </script>
