@@ -6,6 +6,8 @@ import home from './modules/home'
 import detail from './modules/detail'
 import img from './modules/img'
 import color from './modules/color'
+import quotation from './modules/quotation'
+import type from './modules/type'
 
 Vue.use(Vuex)
 
@@ -25,7 +27,9 @@ export default new Vuex.Store({
     home,
     detail,
     img,
-    color
+    color,
+    quotation,
+    type
   },
   plugins:[createLogger()]
 })

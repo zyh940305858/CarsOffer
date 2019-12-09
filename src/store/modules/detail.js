@@ -51,9 +51,12 @@ function formatlist(list){
 const mutations = {
     setCarDeailData(state,data){
         state.cardetaildata = data;
+        sessionStorage.setItem('typelist',JSON.stringify(data.list))
+        sessionStorage.setItem('infoObj',JSON.stringify({pic:data.Picture,AliasName:data.AliasName,year:data.list[0].market_attribute.year,car_name:data.list[0].car_name}))
         //1.拿到年份
         let yeararr = ["全部"];
         let year = data.list.map(item => item.market_attribute.year);
+        sessionStorage.setItem('yeararr',JSON.stringify([...new Set(year)]))
         yeararr = yeararr.concat([...new Set(year)]);
         state.newarr = yeararr;
         //2.拿到当前选择年份的数据
@@ -73,7 +76,6 @@ const mutations = {
     setCurrentIndex(state,data){
         //拿到当前下标
         state.currentindex = data;
-        
         let currentlist = [];
         //判断如果选中下标为0  或者只有两项内容
         if(state.currentindex == 0 || state.newarr.length == 1){
@@ -97,7 +99,6 @@ const actions = {
 
     //设置当前下标及数据
     async setCurrentIndex({commit},payload){
-        console.log(payload)
         await commit('setCurrentIndex',payload)
     }
 }

@@ -27,6 +27,16 @@ const routes = [
     path:'/color',
     name:'color',
     component:() => import('../views/Color/Color.vue')
+  },
+  {
+    path:'/type',
+    name:'type',
+    component:() => import('../views/Type/Type.vue')
+  },
+  {
+    path:'/quotation',
+    name:'quotation',
+    component:() => import('../views/Quotation/Quotation.vue')
   }
 ]
 

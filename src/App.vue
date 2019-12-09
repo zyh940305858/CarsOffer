@@ -36,16 +36,26 @@ html,body,#app
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
   color #2c3e50
-#app>div {
+#app>div{
+   width 100%
+   height 100%
+} 
+#app>.home,.detail,.color,.img,.q {
     width: 100%;
+    height: 100%;
+    -webkit-animation: a .2s ease forwards;
+    animation: a .2s ease forwards;
 }
-// p {
-//     display: block;
-//     margin-block-start: 1em;
-//     margin-block-end: 1em;
-//     margin-inline-start: 0px;
-//     margin-inline-end: 0px;
-// }
+@keyframes a {
+    0% {
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
 .flex-centerY {
     -webkit-box-align: center;
     align-items: center;
@@ -58,5 +68,14 @@ html,body,#app
     display: -webkit-box;
     display: flex;
     -webkit-box-direction: normal;
+}
+.flex-center, .flex-centerX {
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+a, button, input {
+    outline: none;
+    -webkit-appearance: none;
+    border: none;
 }
 </style>

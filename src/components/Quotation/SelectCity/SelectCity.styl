@@ -1,0 +1,76 @@
+.select_city {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    background: #fff;
+    transition: -webkit-transform .2s ease;
+    transition: transform .2s ease;
+    transition: transform .2s ease,-webkit-transform .2s ease;
+    -webkit-transform: translate3d(0,100%,0);
+    transform: translate3d(0,100%,0);
+}
+
+.select_city .province {
+    height: 100%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.select_city .province p {
+    height: .4rem;
+    line-height: .4rem;
+    font-size: .24rem;
+    padding-left: .2rem;
+    background: #f4f4f4;
+}
+
+.select_city .location p:first-child {
+    height: 0.53333rem;
+    line-height: 0.53333rem;
+    font-size: .32rem;
+    padding-left: 0.266666rem;
+    background: #f4f4f4;
+}
+
+.select_city .location p:nth-child(2) {
+    padding-left: 0.53333rem;
+    font-size: 0.373333rem;
+    height: 1.066666rem;
+    line-height: 1.066666rem;
+    background: #fff;
+}
+
+.select_city .province p {
+    height:  0.53333rem;
+    line-height:  0.53333rem;
+    font-size: .32rem;
+    padding-left: 0.266666rem;
+    background: #f4f4f4;
+}
+
+.select_city .province li {
+    padding-left: 0.4rem;
+    font-size: .32rem;
+    height: 1.066666rem;
+    line-height: 1.066666rem;
+    border-bottom: 1px solid #eee;
+    box-sizing: border-box;
+    margin-left: 0.133333rem;
+    position: relative;
+}
+
+.select_city .province li:after {
+    content: "";
+    display: inline-block;
+    padding-top: 0.213333rem;
+    padding-right: 0.213333rem;
+    border-top: 1px solid #999;
+    border-right: 1px solid #999;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    right: 0.466666rem;
+    top: .4rem;
+}

@@ -2,7 +2,7 @@
   <div class="info">
       <p>{{infodata.dealer_price}}</p>
       <p>指导价 {{infodata.official_refer_price}}</p>
-      <div><button>询问底价</button></div>
+      <div><button @click="toQuotationPage">询问底价</button></div>
   </div>
 </template>
 
@@ -11,6 +11,11 @@ export default {
     props:["infodata"],
     created(){
         console.log(this.infodata)
+    },
+    methods:{
+        toQuotationPage(){
+            this.$router.push('/quotation');
+        }
     }
 }
 </script>

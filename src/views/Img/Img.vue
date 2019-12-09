@@ -2,11 +2,10 @@
   <div class="img">
       <div class="flex-row title">
         <p @click="toColorPage"><span>颜色</span></p>
-        <p><span>车款</span></p>
+        <p><span @click="toTypePage">车款</span></p>
       </div>
       <ul class="img_list">
         <li v-for="(item,index) in listarr" :key="index">
-
         </li>
       </ul>
   </div>
@@ -28,6 +27,9 @@ export default {
     toColorPage(){
       let SerialID = sessionStorage.getItem('SerialID');
       this.$router.push('/color');
+    },
+    toTypePage(){
+      this.$router.push('/type');
     }
   },
   created(){
