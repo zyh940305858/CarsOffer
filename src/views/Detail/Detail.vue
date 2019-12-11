@@ -1,8 +1,10 @@
 <template>
   <div class="detail">
+    <div class="content">
     <DetailImg :imgdata="Object.assign({},{url:cardetaildata.CoverPhoto,pic_group_count:cardetaildata.pic_group_count,SerialID:cardetaildata.SerialID})"></DetailImg>
     <DetailInfo v-if="cardetaildata.market_attribute" :infodata="Object.assign({},{dealer_price:cardetaildata.market_attribute.dealer_price,official_refer_price:cardetaildata.market_attribute.official_refer_price})"></DetailInfo>
     <DetailCarList :currentlist="currentlist" :currentindex="currentindex" :newarr="newarr"></DetailCarList>
+    </div>
     <DetailBottom></DetailBottom>
   </div>
 </template>

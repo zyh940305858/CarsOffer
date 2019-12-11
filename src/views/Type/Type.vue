@@ -34,68 +34,30 @@
 </template>
 
 <script>
+import {mapState,mapActions} from 'vuex';
+
 export default {
-  data() {
-    return {
-      newarr: JSON.parse(sessionStorage.getItem("yeararr")),
-      typelist: JSON.parse(sessionStorage.getItem("typelist")),
-      currentlist: [],
-      currentindex: 0
-    };
+  computed:{
+    ...mapState({
+      newarr: state => state.type.newarr,
+      typelist: state => state.type.typelist,
+      currentlist: state => state.type.currentlist,
+      currentindex: state => state.type.currentindex,
+    })
   },
   methods: {
-    sortCurrentList(list) {
-      list.sort((a, b) => {
-        if (a.exhaust_str == b.exhaust_str) {
-          if (a.max_power_str == b.max_power_str) {
-            return b.inale_type > a.inhale_type;
-          } else {
-            return a.max_power - b.max_power;
-          }
-        } else {
-          return a.exhaust - b.exhaust;
-        }
-      });
-      return list;
-    },
-    formatlist(list) {
-      //拼接每款车的key  排量/功率 吸气方式
-      list = list.map(item => {
-        item.key = `${item.exhaust_str}/${item.max_power_str} ${item.inhale_type}`;
-        return item;
-      });
-
-      let newlist = [];
-      list.forEach(item => {
-        let index = newlist.findIndex(value => value.key == item.key);
-        if (index !== -1) {
-          newlist[index].list.push(item);
-        } else {
-          newlist.push({
-            key: item.key,
-            list: [item]
-          });
-        }
-      });
-      return newlist;
-    },
+    ...mapActions({
+      getCurrentList:'type/getCurrentList'
+    }),
     back() {
       this.$router.back(-1);
     },
     setCurrentIndex(index) {
-      this.currentindex = index;
-      this.getCurrentList();
+      this.getCurrentList(index);
     },
-    getCurrentList() {
-      let list = this.typelist.filter(
-        item => item.market_attribute.year == this.newarr[this.currentindex]
-      );
-      list = this.sortCurrentList(list);
-      this.currentlist = this.formatlist(list);
-    }
   },
   created() {
-    this.getCurrentList();
+    this.getCurrentList(0);
   }
 };
 </script>

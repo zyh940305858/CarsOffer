@@ -24,11 +24,6 @@ const routes = [
     component:() => import('../views/Img/Img.vue')
   },
   {
-    path:'/color',
-    name:'color',
-    component:() => import('../views/Color/Color.vue')
-  },
-  {
     path:'/type',
     name:'type',
     component:() => import('../views/Type/Type.vue')

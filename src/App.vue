@@ -26,26 +26,23 @@ export default {
   padding 0
   list-style none
   box-sizing border-box
+html {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
 html,body,#app
   width 100%
   height 100%
-  -webkit-user-select: none;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-#app
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  color #2c3e50
+#app {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
+}
 #app>div{
    width 100%
    height 100%
 } 
-#app>.home,.detail,.color,.img,.q {
-    width: 100%;
-    height: 100%;
-    -webkit-animation: a .2s ease forwards;
-    animation: a .2s ease forwards;
-}
 @keyframes a {
     0% {
         -webkit-transform: translateX(100%);
@@ -55,6 +52,12 @@ html,body,#app
         -webkit-transform: translateX(0);
         transform: translateX(0);
     }
+}
+#app>.home,.detail,.img,.q {
+    width: 100%;
+    height 100%;
+    -webkit-animation: a .2s ease forwards;
+    animation: a .2s ease forwards;
 }
 .flex-centerY {
     -webkit-box-align: center;

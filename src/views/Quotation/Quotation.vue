@@ -5,7 +5,7 @@
           <img src="@/assets/img/icon-help.png" alt="">
       </header>
       <QInfo :cardetaildata="cardetaildata" :currentlist="currentlist"></QInfo>
-      <SelectCity :class="cityflag ? 'active':''"></SelectCity>
+      <SelectCity :class="provinecflag ? 'active':''"></SelectCity>
       <footer>
           <button data-hover="hover">询最低价</button>
       </footer>
@@ -26,7 +26,7 @@ export default {
         ...mapState({
             cardetaildata: state => state.detail.cardetaildata,
             currentlist: state => state.detail.currentlist,
-            cityflag: state => state.quotation.cityflag
+            provinecflag: state => state.quotation.provinecflag
         })
     }
 }

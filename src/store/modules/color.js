@@ -33,6 +33,14 @@ const mutations = {
         console.log(state.colorlist[state.yearsarr[data]])
         state.currentlist = state.colorlist[state.yearsarr[data]];
         state.currentcolorlist = setBackgroundColor(state.currentlist);
+    },
+
+    //设置颜色id 改变本地存储的carinfo对象
+    setColorId(state,data){
+        let carinfo =  JSON.parse(sessionStorage.getItem('carinfo'));
+        carinfo.ColorId = data.ColorId;
+        carinfo.ColorName = data.Name;
+        sessionStorage.setItem('carinfo',JSON.stringify(carinfo));
     }
 };
 

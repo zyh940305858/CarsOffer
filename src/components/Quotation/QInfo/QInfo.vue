@@ -2,10 +2,10 @@
   <keep-alive>
     <div class="content">
       <div @click="toTypePage" class="q_info flex-row">
-        <img :src="infoobj.pic" />
+        <img :src="carinfo.pic" />
         <div class="flex-column flex-centerX">
-          <p>{{infoobj.AliasName}}</p>
-          <p>{{infoobj.year}}款{{infoobj.car_name}}</p>
+          <p>{{carinfo.AliasName}}</p>
+          <p>{{carinfo.year}}款{{carinfo.car_name}}</p>
         </div>
       </div>
       <div class="self_info">
@@ -21,7 +21,7 @@
           </li>
           <li>
             <span>城市</span>
-            <span @click="showCity(true)">北京</span>
+            <span @click="showProvinec(true)">{{city}}</span>
           </li>
         </ul>
         <div class="quotation">
@@ -154,7 +154,9 @@ import { mapState, mapActions } from "vuex";
 export default {
   data(){
     return {
-      infoobj:JSON.parse(sessionStorage.getItem('infoObj'))
+      carinfo:JSON.parse(sessionStorage.getItem('carinfo')),
+      city: "北京"
+      //JSON.parse(sessionStorage.getItem('userinfo')).CityName
     }
   },
   methods: {
@@ -162,7 +164,7 @@ export default {
       this.$router.push("/type");
     },
     ...mapActions({
-      showCity: "quotation/showCity"
+      showProvinec: "quotation/showProvinec"
     })
   }
 };

@@ -47,22 +47,42 @@
         border-left: 1px solid #ececec;
     }
 }
-.img .img_list {
+
+.img .img_default {
+    width: 100%;
     overflow: hidden;
     position: absolute;
     background: #fff;
-    top: 1.306667rem;
+    top: 1.306666rem;
     bottom: 0;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     border-bottom: .4rem solid #f4f4f4;
-    li {
-        display: list-item;
-        text-align: -webkit-match-parent;
+}
+
+.img_de{
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    background: #fff;
+    top: 1.306666rem;
+    bottom: 0;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    border-bottom: .4rem solid #f4f4f4;
+}
+
+
+
+.img .img_default>div{
+    width: 100%;
+}
+
+.img .img_default>div>div {
         position: relative;
         float: left;
-        margin-right: 0.06rem;
-        margin-bottom: 0.06rem;
+        margin-right: .08rem;
+        margin-bottom: .08rem;
         width: 3.28rem;
         height: 3.28rem;
         padding: 0;
@@ -71,11 +91,58 @@
             height: 100%;
             background-size: cover;
         }
-    }
-    li:nth-child(3n+3) {
+}
+
+.img .img_default>div>div:nth-child(3n+3) {
         margin-right: 0;
+}
+
+.p{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: rgba(56,90,130,.5);
+    z-index 99
+    color: #fff;
+    display: block;
+    p:first-child {
+        font-size: 0.37333rem;
+        margin-top: 1.066666rem;
+    }
+    p:nth-child(2) {
+        font-size: 0.346666rem;
     }
 }
-li, ul {
-    list-style-type: none;
+
+
+
+.img_list {
+    background: #f4f4f4;
+    top: 0;
+    text-align: center;
+    position: fixed;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+
+.img_list li {
+    float: left;
+    margin-right: .08rem;
+    margin-bottom: .08rem;
+    width: 3.28rem;
+    height: 3.28rem;
+    padding: 0;
+    img{
+        width: 100%;
+        height: 100%;
+    }
+}
+
+li:nth-child(3n+3) {
+        margin-right: 0;
 }

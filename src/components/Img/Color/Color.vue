@@ -6,7 +6,7 @@
               <span  @click="getCurrentIndex(index)" :class="index === currentindex ? 'active':''" v-for="(item,index) in yearsarr" :key="index">{{item}}</span>
           </p>
           <ul>
-              <li v-for="(item,index) in currentlist" :color-id="item.ColorId" :key="index">
+              <li @click="toImgPage(item)" v-for="(item,index) in currentlist" :color-id="item.ColorId" :key="index">
                   <span :style="currentcolorlist[index]"></span>
                   {{item.Name}}
               </li>
@@ -23,15 +23,28 @@ export default {
             yearsarr:state => state.color.yearsarr,
             currentindex:state => state.color.currentindex,
             currentlist:state => state.color.currentlist,
-            currentcolorlist:state => state.color.currentcolorlist
+            currentcolorlist:state => state.color.currentcolorlist,
         })
     },
-
     methods:{
         ...mapActions({
             getColorList:'color/getColorList',
-            getCurrentIndex:'color/getCurrentIndex'
-        })
+            getCurrentIndex:'color/getCurrentIndex',
+            getImgList:'img/getImgList'
+        }),
+        ...mapMutations({
+            setColorId:'color/setColorId',
+            hideColorPage:'img/hideColorPage',
+            setCarInfo:'img/setCarInfo'
+        }),
+        toImgPage(Obj){
+            this.setColorId(Obj);
+            this.setCarInfo();
+            let carinfo = JSON.parse(sessionStorage.getItem('carinfo'));
+            let obj = {SerialID:carinfo.SerialID, CarId:carinfo.car_Id, ColorID:carinfo.ColorId }
+            this.getImgList(obj);
+            this.hideColorPage();
+        }
     },
     
     async created(){

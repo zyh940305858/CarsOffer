@@ -52,7 +52,7 @@ const mutations = {
     setCarDeailData(state,data){
         state.cardetaildata = data;
         sessionStorage.setItem('typelist',JSON.stringify(data.list))
-        sessionStorage.setItem('infoObj',JSON.stringify({pic:data.Picture,AliasName:data.AliasName,year:data.list[0].market_attribute.year,car_name:data.list[0].car_name}))
+        sessionStorage.setItem('carinfo',JSON.stringify({SerialID:data.SerialID,pic:data.Picture,AliasName:data.AliasName,year:data.list[0].market_attribute.year,car_name:data.list[0].car_name,car_Id:data.list[0].car_id,ColorName:'',ColorId:""}))
         //1.拿到年份
         let yeararr = ["全部"];
         let year = data.list.map(item => item.market_attribute.year);
