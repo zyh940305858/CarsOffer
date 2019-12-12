@@ -27,6 +27,3 @@ npm run serve
 - [x] 主页侧边栏的touch滑动效果
 - [x] 汽车详情页
 
-###  车轮网网站地址
-
-> http://h5.chelun.com/2017/official/#/
