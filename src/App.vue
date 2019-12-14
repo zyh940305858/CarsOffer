@@ -30,10 +30,13 @@ html {
     -webkit-user-select: none;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
+    
 }
 html,body,#app
   width 100%
   height 100%
+  -webkit-animation: a .4s ease forwards;
+  animation: a .4s ease forwards;
 #app {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

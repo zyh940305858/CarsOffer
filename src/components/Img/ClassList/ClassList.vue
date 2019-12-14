@@ -1,28 +1,59 @@
 <template>
   <div class="wrapper" ref="wrapper">
-    <ul class="content">
-        <div class="top_msg" :style="{top:-30+'px',bottom: 0 +'px'}">正在刷新</div>
-      <li v-for="(item,index) in [1,2,3,4,5,6,7,8,9]" :key="index">{{item}}</li>
-      <div>正在加载</div>
-    </ul>
+    <slot></slot>
   </div>
 </template>
 
 <script>
 import BScroll from "better-scroll";
+import { mapState, mapActions, mapMutations } from "vuex";
+
 export default {
   created() {
     this.$nextTick(() => {
-      let MScroll = new BScroll(this.$refs.wrapper, {
-        pullDownRefresh: {
-          threshold: 50,
-          stop: 30
-        },
-        pullUpLoad: {
-          threshold: 50
+      this.scrollinit();
+    });
+  },
+  computed: {
+    ...mapState({
+      Page: state => state.img.Page,
+      PageSize: state => state.img.PageSize,
+      classimagelist: state => state.img.classimagelist,
+      carinfo: state => state.img.carinfo
+    })
+  },
+  methods: {
+    ...mapActions({
+      getClassImageList: "img/getClassImageList",
+      setPullUpData:'img/setPullUpData'
+    }),
+    scrollinit() {
+      this.MScroll = new BScroll(this.$refs.wrapper, {
+        probeType: 1,
+        click: true
+      });
+      //滑动结束松开事件
+      this.MScroll.on("touchEnd", pos => {
+        //上拉刷新
+        if (pos.y > 30) {
+          setTimeout(() => {
+            this.$emit("toClassImageList");
+          }, 2000);
+        } else if (pos.y < this.MScroll.maxScrollY - 30) {
+          //下拉加载
+          setTimeout(() => {
+          let obj = {
+            SerialID: this.carinfo.SerialID,
+            ImageID: sessionStorage.getItem('ImageID'),
+            Page: this.Page,
+            PageSize: this.PageSize,
+            ColorID: this.carinfo.ColorID
+          };
+          this.setPullUpData(obj);
+          }, 2000);
         }
       });
-    });
+    }
   }
 };
 </script>
@@ -43,10 +74,10 @@ li {
   background-color: red;
   border-bottom: 1px solid #ddd;
 }
-.top_msg{
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    position: absolute;
+.top_msg {
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  position: absolute;
 }
 </style>
