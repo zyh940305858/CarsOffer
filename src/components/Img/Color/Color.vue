@@ -1,6 +1,6 @@
 <template>
   <div class="color">
-      <p>全部颜色</p>
+      <p @click="hideColorPage">全部颜色</p>
       <div>
           <p class="type">
               <span  @click="getCurrentIndex(index)" :class="index === currentindex ? 'active':''" v-for="(item,index) in yearsarr" :key="index">{{item}}</span>
@@ -24,6 +24,7 @@ export default {
             currentindex:state => state.color.currentindex,
             currentlist:state => state.color.currentlist,
             currentcolorlist:state => state.color.currentcolorlist,
+            carinfo:state => state.img.carinfo
         })
     },
     methods:{
@@ -33,24 +34,28 @@ export default {
             getImgList:'img/getImgList'
         }),
         ...mapMutations({
-            setColorId:'color/setColorId',
             hideColorPage:'img/hideColorPage',
-            setCarInfo:'img/setCarInfo'
+            setCarInfo:'img/setCarInfo',
+            setColorId:'color/setColorId'
         }),
-        toImgPage(Obj){
-            this.setColorId(Obj);
+        toImgPage(item){
+            this.setColorId(item);
             this.setCarInfo();
-            let carinfo = JSON.parse(sessionStorage.getItem('carinfo'));
-            let obj = {SerialID:carinfo.SerialID, CarId:carinfo.car_Id, ColorID:carinfo.ColorId }
-            this.getImgList(obj);
+            if(this.carinfo.car_Id){
+                let obj = {SerialID:this.carinfo.SerialID,CarId:this.carinfo.car_Id, ColorID:this.carinfo.ColorId };
+                this.getImgList(obj);
+            }else{
+                let obj = {SerialID:this.carinfo.SerialID, ColorID:this.carinfo.ColorId }
+                this.getImgList(obj);
+            }
             this.hideColorPage();
         }
     },
     
     async created(){
-        let SerialID = await sessionStorage.getItem('SerialID');
+        let SerialID = this.carinfo.SerialID;
         await this.getColorList(SerialID);
-        await this.getCurrentIndex(0);
+        this.getCurrentIndex(0);
     }
 }
 </script>

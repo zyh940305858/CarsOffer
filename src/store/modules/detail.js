@@ -5,7 +5,7 @@ const state = {
     yeararr:[],         //年份数组
     currentindex:0,     //选中下标
     currentlist:[],     //选中的数据
-    newarr:[]      
+    newarr:[]
 }
 
 //选中数据排序方法
@@ -52,7 +52,7 @@ const mutations = {
     setCarDeailData(state,data){
         state.cardetaildata = data;
         sessionStorage.setItem('typelist',JSON.stringify(data.list))
-        sessionStorage.setItem('carinfo',JSON.stringify({SerialID:data.SerialID,pic:data.Picture,AliasName:data.AliasName,year:data.list[0].market_attribute.year,car_name:data.list[0].car_name,car_Id:data.list[0].car_id,ColorName:'',ColorId:""}))
+        sessionStorage.setItem('carinfo',JSON.stringify({SerialID:data.SerialID,pic:data.Picture,AliasName:data.AliasName,year:data.list[0].market_attribute.year,car_name:"车款",car_Id:"",ColorName:'',ColorId:""}))
         //1.拿到年份
         let yeararr = ["全部"];
         let year = data.list.map(item => item.market_attribute.year);
@@ -87,6 +87,21 @@ const mutations = {
         currentlist = sortCurrentList(currentlist);
         currentlist = formatlist(currentlist);
         state.currentlist = currentlist;
+    },
+
+    setCurrentId(state,data){
+        if(data){
+            sessionStorage.setItem('currentid',data)
+        }else{
+            sessionStorage.setItem('currentid',state.cardetaildata.list[0].car_id)
+        }
+    },
+
+    setDefault(state,data){
+        let carinfo = JSON.parse(sessionStorage.getItem('carinfo'));
+        carinfo.car_name = state.cardetaildata.list[0].car_name;
+        carinfo.car_Id = state.cardetaildata.list[0].car_id;
+        sessionStorage.setItem('carinfo',JSON.stringify(carinfo));
     }
 }
 

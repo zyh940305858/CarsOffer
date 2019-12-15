@@ -1,7 +1,6 @@
 <template>
-  <keep-alive>
     <div class="type">
-      <p @click="back">全部车款</p>
+      <p @click="toback">全部车款</p>
       <div>
         <div class="c_type">
           <span
@@ -15,7 +14,7 @@
           <div v-for="(item,index) in currentlist" :key="index">
             <p class="tip">{{item.key}}</p>
             <ul>
-              <li :car-id="item1.car_id" v-for="(item1,index1) in item.list" :key="index1">
+              <li  @click="setCaridFn(item1)" :car-id="item1.car_id" v-for="(item1,index1) in item.list" :key="index1">
                 <p>
                   <span>{{item1.market_attribute.year}}款{{item1.car_name}}</span>
                   <span>{{item1.market_attribute.dealer_price_min}}万起</span>
@@ -30,11 +29,10 @@
         </div>
       </div>
     </div>
-  </keep-alive>
 </template>
 
 <script>
-import {mapState,mapActions} from 'vuex';
+import {mapState,mapActions,mapMutations} from 'vuex';
 
 export default {
   computed:{
@@ -43,18 +41,35 @@ export default {
       typelist: state => state.type.typelist,
       currentlist: state => state.type.currentlist,
       currentindex: state => state.type.currentindex,
+      carinfo:state => state.img.carinfo
     })
   },
   methods: {
-    ...mapActions({
-      getCurrentList:'type/getCurrentList'
+    ...mapMutations({
+      setCarId:'type/setCarId',
+      setCarInfo:'img/setCarInfo'
     }),
-    back() {
-      this.$router.back(-1);
-    },
+    ...mapActions({
+      getCurrentList:'type/getCurrentList',
+      getImgList:'img/getImgList'
+    }),
     setCurrentIndex(index) {
       this.getCurrentList(index);
     },
+    setCarid(item1){
+      this.setCarId(item1);
+      this.setCarInfo();
+      let obj = {SerialID:this.carinfo.SerialID, CarId:this.carinfo.car_Id, ColorID:this.carinfo.ColorId };
+      this.getImgList(obj);
+      this.hideTypePage();
+    },
+    toback(){
+      this.$router.go(-1);
+    },
+    setCaridFn(item){
+      this.setCarId(item);
+      this.$router.go(-1);
+    }
   },
   created() {
     this.getCurrentList(0);

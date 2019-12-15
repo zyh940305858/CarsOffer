@@ -28,6 +28,20 @@ export default {
             currentlist: state => state.detail.currentlist,
             provinecflag: state => state.quotation.provinecflag
         })
+    },
+    methods:{
+        ...mapActions({
+            autoGetPosition:'quotation/autoGetPosition',
+            getDealerList:'quotation/getDealerList'
+        })
+    },
+    async created(){
+        await this.autoGetPosition();
+        let obj = {
+            carId:JSON.parse(sessionStorage.getItem('carinfo')).car_Id,
+            cityId: JSON.parse(sessionStorage.getItem('userinfo')).CityID || JSON.parse(localStorage.getItem('position')).CityID
+        }
+        await this.getDealerList(obj);
     }
 }
 </script>

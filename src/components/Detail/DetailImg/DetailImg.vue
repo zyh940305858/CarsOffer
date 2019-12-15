@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { state, mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 export default {
   props:['imgdata'],
   computed: {
@@ -15,11 +15,11 @@ export default {
     })
   },
   methods: {
-    ...mapActions({
-      getImgList: "img/getImgList"
+    ...mapMutations({
+      setCurrentId:'detail/setCurrentId'
     }),
     toImgPage(SerialID){
-      sessionStorage.setItem('SerialID',SerialID);
+      this.setCurrentId();
       this.$router.push(`/img`);
     }
   }

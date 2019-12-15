@@ -17,7 +17,6 @@ function setBackgroundColor(list) {
 const mutations = {
     //设置全部的颜色数据
     setColorList(state,data){
-        console.log(data);
         state.colorlist = data;
     },
 
@@ -37,7 +36,7 @@ const mutations = {
 
     //设置颜色id 改变本地存储的carinfo对象
     setColorId(state,data){
-        let carinfo =  JSON.parse(sessionStorage.getItem('carinfo'));
+        let carinfo = JSON.parse(sessionStorage.getItem('carinfo'));
         carinfo.ColorId = data.ColorId;
         carinfo.ColorName = data.Name;
         sessionStorage.setItem('carinfo',JSON.stringify(carinfo));
@@ -48,6 +47,7 @@ const actions = {
     //获取到颜色全部数据
     async getColorList({commit},payload){
         let res = await getColorList(payload);
+        console.log(res)
         await commit('setColorList',res.data);
         await commit('setYearsArr',res.data)
     },

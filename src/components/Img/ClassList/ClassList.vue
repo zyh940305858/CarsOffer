@@ -1,6 +1,16 @@
 <template>
   <div class="wrapper" ref="wrapper">
-    <slot></slot>
+    <ul class="content">
+      <li v-for="(item,index) in detailimglist" :key="index" @click="showImgSwiper(index)">
+        <img
+          :style="{
+              background:'url('+item.Url+')',
+              backgroundSize:'cover',  
+              backgroundRepeat:'no-repeat',
+              backgroundPosition:'center'}"
+        />
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -16,17 +26,28 @@ export default {
   },
   computed: {
     ...mapState({
-      Page: state => state.img.Page,
-      PageSize: state => state.img.PageSize,
-      classimagelist: state => state.img.classimagelist,
-      carinfo: state => state.img.carinfo
+      page: state => state.img.page,
+      pagesize: state => state.img.pagesize,
+      detailimglist: state => state.img.detailimglist,
+      carinfo: state => state.img.carinfo,
+      imageid: state => state.img.imageid
     })
   },
   methods: {
     ...mapActions({
       getClassImageList: "img/getClassImageList",
-      setPullUpData:'img/setPullUpData'
+      setPullUpData: "img/setPullUpData",
+      getPullDownRefresh:'img/getPullDownRefresh'
     }),
+    ...mapMutations({
+      setPage: 'img/setPage',
+      showImgSwiperPage: 'img/showImgSwiperPage',
+      setImgSwiperIndex: 'img/setImgSwiperIndex'
+    }),
+    showImgSwiper(index){
+      this.showImgSwiperPage();
+      this.setImgSwiperIndex(index);
+    },
     scrollinit() {
       this.MScroll = new BScroll(this.$refs.wrapper, {
         probeType: 1,
@@ -37,19 +58,27 @@ export default {
         //上拉刷新
         if (pos.y > 30) {
           setTimeout(() => {
-            this.$emit("toClassImageList");
-          }, 2000);
+            let obj = {
+              SerialID: this.carinfo.SerialID,
+              ImageID:this.imageid,
+              Page: 1,
+              PageSize: this.pagesize,
+              ColorID: this.carinfo.ColorID
+            };
+            this.getPullDownRefresh(obj);
+          }, 1000);
         } else if (pos.y < this.MScroll.maxScrollY - 30) {
           //下拉加载
           setTimeout(() => {
-          let obj = {
-            SerialID: this.carinfo.SerialID,
-            ImageID: sessionStorage.getItem('ImageID'),
-            Page: this.Page,
-            PageSize: this.PageSize,
-            ColorID: this.carinfo.ColorID
-          };
-          this.setPullUpData(obj);
+            this.setPage();
+            let obj = {
+              SerialID: this.carinfo.SerialID,
+              ImageID: this.imageid,
+              Page: this.page,
+              PageSize: this.pagesize,
+              ColorID: this.carinfo.ColorID
+            };
+            this.getClassImageList(obj);
           }, 2000);
         }
       });
@@ -58,26 +87,6 @@ export default {
 };
 </script>
 
-<style scoped>
-.wrapper {
-  background-color: red;
-  width: 100%;
-  height: 100%;
-  background-color: #ccc;
-  position: relative;
-}
-.content {
-  width: 100%;
-}
-li {
-  height: 200px;
-  background-color: red;
-  border-bottom: 1px solid #ddd;
-}
-.top_msg {
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-  position: absolute;
-}
+<style lang="stylus" scoped>
+@import './ClassList.styl'
 </style>

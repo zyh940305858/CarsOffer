@@ -58,6 +58,14 @@ const mutations = {
     },
     setTypeList(state,data){
       state.typelist = JSON.parse(sessionStorage.getItem("typelist"));
+    },
+    setCarId(state,data){
+      console.log(data)
+      let carinfo = JSON.parse(sessionStorage.getItem('carinfo'));
+      carinfo.car_Id = data.car_id;
+      carinfo.year = data.market_attribute.year;
+      carinfo.car_name = data.car_name;
+      sessionStorage.setItem('carinfo',JSON.stringify(carinfo));
     }
 };
 

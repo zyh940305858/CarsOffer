@@ -7,13 +7,19 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex';
+
 export default {
     props:["infodata"],
     created(){
         console.log(this.infodata)
     },
     methods:{
+        ...mapMutations({
+            setDefault:'detail/setDefault'
+        }),
         toQuotationPage(){
+            this.setDefault();
             this.$router.push('/quotation');
         }
     }

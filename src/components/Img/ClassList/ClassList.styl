@@ -1,0 +1,42 @@
+.wrapper .img-list {
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    overflow hidden;
+    position relative;
+}
+
+.top_msg {
+  width 100%;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.img_list .content{
+    background: #f4f4f4;
+    top: 0;
+    text-align: center;
+    position: fixed;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    z-index: 99;
+}
+
+.img_list .content li {
+    float: left;
+    margin-right: .08rem;
+    margin-bottom: .08rem;
+    width: 3.28rem;
+    height: 3.28rem;
+    padding: 0;
+    img{
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.img_list .content li:nth-child(3n+3) {
+        margin-right: 0;
+}     

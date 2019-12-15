@@ -3,7 +3,7 @@
     <div class="province">
       <div class="location">
         <p>自动定位</p>
-        <p>北京</p>
+        <p>{{position.CityName}}</p>
       </div>
       <div class="list">
         <p>省市</p>
@@ -14,37 +14,48 @@
     </div>
     <div :class="cityflag ? 'city active':''" @click="hideCity(false)">
       <ul id="city_list">
-        <li @click="hideProvinecPage(item)" v-for="(item,index) in citylist" :key="index">{{item.CityName}}</li>
+        <li @click="setCityId(item)" v-for="(item,index) in citylist" :key="index">{{item.CityName}}</li>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
-import {mapState,mapActions} from 'vuex';
+import {mapState,mapActions,mapMutations} from 'vuex';
 
 export default {
   computed:{
     ...mapState({
       provineclist: state => state.quotation.provineclist,
       cityflag: state => state.quotation.cityflag,
-      citylist: state => state.quotation.citylist
+      citylist: state => state.quotation.citylist,
+      position: state => state.quotation.position
     })
   },
   methods:{
+    ...mapMutations({
+      hideProvinec:'quotation/hideProvinec',
+      showCity:'quotation/showCity',
+      hideCity:'quotation/hideCity',
+      showProvinec:'quotation/showProvinec',
+      setUserInfo:'quotation/setUserInfo'
+    }),
     ...mapActions({
       getProvinecList:'quotation/getProvinecList',
-      hideProvinec:'quotation/hideProvinec',
       getCityList:'quotation/getCityList',
-      showCity:'quotation/showCity',
-      hideCity:'quotation/hideCity'
+      getDealerList:'quotation/getDealerList'
     }),
     showCityPage(id){
       this.getCityList(id);
       this.showCity(true);
     },
-    hideProvinecPage(obj){
-      sessionStorage.setItem('userinfo',JSON.stringify(obj));
+    async setCityId(obj){
+      await this.setUserInfo(obj);
+      let obj1 = {
+            carId:JSON.parse(sessionStorage.getItem('carinfo')).car_Id,
+            cityId: JSON.parse(sessionStorage.getItem('userinfo')).CityID
+      }
+      await this.getDealerList(obj1);
       this.hideProvinec(false);
     }
   },

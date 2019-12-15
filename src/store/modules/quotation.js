@@ -1,11 +1,16 @@
-import { getCityList } from '@/services';
+import { getCityList, autoGetPosition, getDealerList } from '@/services';
 
 const state = {
     provinecflag:false,
     provineclist:[],
     cityflag:false,   
     citylist:[],
-    carinfo:JSON.parse(sessionStorage.getItem('carinfo'))
+    carinfo:JSON.parse(sessionStorage.getItem('carinfo')),
+    typeflag:false,
+    carinfo:{},
+    position:{},
+    dealerlist:[],
+    currentcity:{}
 };
 
 const mutations = {
@@ -22,35 +27,44 @@ const mutations = {
         state.cityflag = data;
     },
     getProvinecList(state,data){
-        console.log(data)
         state.provineclist = data;
     },
     getCityList(state,data){
-        console.log(data)
         state.citylist = data;
+    },
+    setCarInfo(state,data){
+        state.carinfo = JSON.parse(sessionStorage.getItem('carinfo'));
+    },
+    setPosition(state,data){
+        localStorage.setItem('position',JSON.stringify(data));
+        state.position = data;
+    },
+    setDealerList(state,data){
+        state.dealerlist = data.list;
+    },
+    setUserInfo(state,data){
+        sessionStorage.setItem('userinfo',JSON.stringify(data));
+        state.currentcity = data;
     }
 };
 
 const actions = {
-    async showProvinec({commit},payload){
-        await commit('showProvinec',payload);
-    },
-    async hideProvinec({commit},payload){
-        await commit('hideProvinec',payload);
-    },
-    async showCity({commit},payload){
-        await commit('showCity',payload);
-    },
-    async hideCity({commit},payload){
-        await commit('hideCity',payload);
-    },
     async getProvinecList({commit},payload){
         let res = await getCityList();
-        await commit('getProvinecList',res.data)
+        commit('getProvinecList',res.data)
     },
     async getCityList({commit},payload){
         let res = await getCityList(payload);
-        await commit('getCityList',res.data)
+        commit('getCityList',res.data)
+    },
+    async autoGetPosition({commit},payload){
+        let res = await autoGetPosition();
+        commit('setPosition',res.data)
+    },
+    async getDealerList({commit},payload){
+        let {carId, cityId} = payload;
+        let res = await getDealerList(carId, cityId);
+        commit('setDealerList',res.data)
     }
 };
 

@@ -8,3 +8,11 @@ export let getCityList = (provinceid) => {
     }
     
 }
+
+export let autoGetPosition = () => {
+    return request(`https://baojia.chelun.com/location-client.html`);
+}
+
+export let getDealerList = (carId,cityId) => {
+    return request(`https://baojia.chelun.com/v2-dealer-alllist.html?carId=${carId}&cityId=${cityId}`)
+}
