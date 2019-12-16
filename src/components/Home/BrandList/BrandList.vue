@@ -16,17 +16,21 @@
 import {mapActions,mapMutations} from 'vuex'
 
 export default {
-    props:['list'],
+    props:['list'],//接受父元素的参数
+
     methods:{
         ...mapActions({
             //抛出获取品牌列表函数
             getMasterTypeList:"home/getMasterTypeList"
         }),
+
         ...mapMutations({
             //抛出展示和隐藏划出层函数
             showRightProup:"home/showRightProup",
             hideRightProup: "home/hideRightProup"
         }),
+
+        //设置类型列表
         setTypeList(id){
             this.getMasterTypeList(id);
             this.showRightProup(true);

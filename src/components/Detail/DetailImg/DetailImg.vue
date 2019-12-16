@@ -7,22 +7,29 @@
 
 <script>
 import { mapActions, mapState, mapMutations } from "vuex";
+
 export default {
   props:['imgdata'],
+
   computed: {
     ...mapState({
-      cardetaildata: state => state.detail.cardetaildata
+      cardetaildata: state => state.detail.cardetaildata //原始的详情页数据
     })
   },
+
+
   methods: {
     ...mapMutations({
       setCurrentId:'detail/setCurrentId'
     }),
+
+    //设置选中的车系id 跳转到图片页
     toImgPage(SerialID){
       this.setCurrentId();
       this.$router.push(`/img`);
     }
   }
+
 };
 </script>
 
