@@ -102,6 +102,14 @@ const mutations = {
         carinfo.car_name = state.cardetaildata.list[0].car_name;
         carinfo.car_Id = state.cardetaildata.list[0].car_id;
         sessionStorage.setItem('carinfo',JSON.stringify(carinfo));
+    },
+    
+    setCarId(state,data){
+        console.log(data)
+        let carinfo = JSON.parse(sessionStorage.getItem('carinfo'));
+        carinfo.car_name = data.car_name;
+        carinfo.car_Id = data.car_id;
+        sessionStorage.setItem('carinfo',JSON.stringify(carinfo));
     }
 }
 

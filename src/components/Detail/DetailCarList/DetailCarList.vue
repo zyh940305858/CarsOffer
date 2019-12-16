@@ -19,7 +19,7 @@
               <span>指导价 {{item1.market_attribute.official_refer_price}}</span>
               <span>{{item1.market_attribute.dealer_price_min}}</span>
             </p>
-            <button>询问底价</button>
+            <button @click="toQuotation(item1)">询问底价</button>
           </li>
         </ul>
       </div>
@@ -28,14 +28,21 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions,mapMutations } from "vuex";
 
 export default {
   props: ["currentlist", "currentindex", "newarr"],
   methods: {
       ...mapActions({
           setCurrentIndex:'detail/setCurrentIndex'
-      })
+      }),
+      ...mapMutations({
+        setCarId:'detail/setCarId'
+      }),
+      toQuotation(item){
+        this.setCarId(item);
+        this.$router.push('/quotation');
+      }
   }
 };
 </script>

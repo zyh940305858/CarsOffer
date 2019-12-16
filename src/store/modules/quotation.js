@@ -5,7 +5,6 @@ const state = {
     provineclist:[],
     cityflag:false,   
     citylist:[],
-    carinfo:JSON.parse(sessionStorage.getItem('carinfo')),
     typeflag:false,
     carinfo:{},
     position:{},
@@ -45,6 +44,7 @@ const mutations = {
     setUserInfo(state,data){
         sessionStorage.setItem('userinfo',JSON.stringify(data));
         state.currentcity = data;
+        console.log(state.currentcity)
     }
 };
 

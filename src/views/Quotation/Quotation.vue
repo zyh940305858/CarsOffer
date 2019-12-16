@@ -26,7 +26,10 @@ export default {
         ...mapState({
             cardetaildata: state => state.detail.cardetaildata,
             currentlist: state => state.detail.currentlist,
-            provinecflag: state => state.quotation.provinecflag
+            provinecflag: state => state.quotation.provinecflag,
+            userinfo: state => state.detail.userinfo,
+            carinfo: state => state.quotation.carinfo,
+            position: state => state.quotation.position
         })
     },
     methods:{
@@ -37,11 +40,19 @@ export default {
     },
     async created(){
         await this.autoGetPosition();
-        let obj = {
-            carId:JSON.parse(sessionStorage.getItem('carinfo')).car_Id,
-            cityId: JSON.parse(sessionStorage.getItem('userinfo')).CityID || JSON.parse(localStorage.getItem('position')).CityID
+        if(sessionStorage.getItem('userinfo')){
+            let obj = {
+                carId:JSON.parse(sessionStorage.getItem('carinfo')).car_Id,
+                cityId: JSON.parse(sessionStorage.getItem('userinfo')).CityID
+            }
+            await this.getDealerList(obj);
+        }else{
+            let obj = {
+                carId:JSON.parse(sessionStorage.getItem('carinfo')).car_Id,
+                cityId: this.position.CityID
+            }
+            await this.getDealerList(obj);
         }
-        await this.getDealerList(obj);
     }
 }
 </script>

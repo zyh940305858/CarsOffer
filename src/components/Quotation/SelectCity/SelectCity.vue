@@ -3,7 +3,7 @@
     <div class="province">
       <div class="location">
         <p>自动定位</p>
-        <p>{{position.CityName}}</p>
+        <p @click="setCityFn(position)">{{position.CityName}}</p>
       </div>
       <div class="list">
         <p>省市</p>
@@ -29,7 +29,9 @@ export default {
       provineclist: state => state.quotation.provineclist,
       cityflag: state => state.quotation.cityflag,
       citylist: state => state.quotation.citylist,
-      position: state => state.quotation.position
+      position: state => state.quotation.position,
+      carinfo: state => state.quotation.carinfo,
+      currentcity: state => state.quotation.currentcity
     })
   },
   methods:{
@@ -43,7 +45,8 @@ export default {
     ...mapActions({
       getProvinecList:'quotation/getProvinecList',
       getCityList:'quotation/getCityList',
-      getDealerList:'quotation/getDealerList'
+      getDealerList:'quotation/getDealerList',
+      autoGetPosition:'quotation/autoGetPosition'
     }),
     showCityPage(id){
       this.getCityList(id);
@@ -52,15 +55,25 @@ export default {
     async setCityId(obj){
       await this.setUserInfo(obj);
       let obj1 = {
-            carId:JSON.parse(sessionStorage.getItem('carinfo')).car_Id,
-            cityId: JSON.parse(sessionStorage.getItem('userinfo')).CityID
+            carId:this.carinfo.car_Id,
+            cityId: this.currentcity.CityID
+      }
+      await this.getDealerList(obj1);
+      this.hideProvinec(false);
+    },
+    async setCityFn(pos){
+      await this.setUserInfo(pos);
+      let obj1 = {
+            carId:this.carinfo.car_Id,
+            cityId: this.position.CityID
       }
       await this.getDealerList(obj1);
       this.hideProvinec(false);
     }
   },
-  created(){
-    this.getProvinecList()
+  async created(){
+    await this.autoGetPosition();
+    await this.getProvinecList()
   }
 };
 </script>
