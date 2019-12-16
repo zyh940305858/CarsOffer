@@ -17,7 +17,7 @@
 <script>
 import BScroll from "better-scroll";
 import { mapState, mapActions, mapMutations } from "vuex";
-
+var timer,timeout;
 export default {
   //创建后初始化better-Scroll
   created() {
@@ -68,7 +68,9 @@ export default {
       this.MScroll.on("touchEnd", pos => {
         //上拉刷新
         if (pos.y > 30) {
-          setTimeout(() => {
+          //防抖处理
+          if(timer) clearTimeout(timer);
+          timer = setTimeout(() => {
             let obj = {
               SerialID: this.carinfo.SerialID,
               ImageID:this.imageid,
@@ -79,19 +81,21 @@ export default {
             this.getPullDownRefresh(obj);
           }, 1000);
         } else if (pos.y < this.MScroll.maxScrollY - 30) {
-          
-          //下拉加载
-          setTimeout(() => {
-            this.setPage();
-            let obj = {
-              SerialID: this.carinfo.SerialID,
-              ImageID: this.imageid,
-              Page: this.page,
-              PageSize: this.pagesize,
-              ColorID: this.carinfo.ColorID
-            };
-            this.getClassImageList(obj);
-          }, 2000);
+          //下拉加载  节流函数
+          if(!timeout){
+            timeout = setTimeout(() => {
+              this.setPage();
+              let obj = {
+                SerialID: this.carinfo.SerialID,
+                ImageID: this.imageid,
+                Page: this.page,
+                PageSize: this.pagesize,
+                ColorID: this.carinfo.ColorID
+              };
+              timeout = null;
+              this.getClassImageList(obj);
+            }, 2000);
+          }
         }
       });
     }
