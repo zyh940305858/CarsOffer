@@ -3,6 +3,7 @@
   <div class="right_popup" :class="this.homeproupflag ? 'active':''" @click="hideRightProup(false)">
     <div v-for="(item,index) in typelist" :key="index">
       <p class="typelist_name" @click="hideRightProup(false)">{{item.GroupName}}</p>
+
       <!-- 汽车类型列表 -->
       <ul class="typelist_ul">
         <li
@@ -17,6 +18,7 @@
           </div>
         </li>
       </ul>
+      
     </div>
   </div>
 </template>
@@ -31,11 +33,15 @@ export default {
       homeproupflag: state => state.home.homeproupflag   //弹出层控制
     })
   },
+
+
   methods: {
     ...mapMutations({
       //抛出隐藏弹出层函数
       hideRightProup: "home/hideRightProup"
     }),
+
+    //跳转到detail  隐藏首页的省市
     toDetailPage(id) {
       this.hideRightProup(false);
       //跳转详情

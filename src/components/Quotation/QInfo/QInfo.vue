@@ -1,6 +1,6 @@
 <template>
-  <keep-alive>
     <div class="content">
+      <!-- 表单页头部数据 -->
       <div @click="showType" class="q_info flex-row">
         <img :src="carinfo.pic" />
         <div class="flex-column flex-centerX">
@@ -8,6 +8,8 @@
           <p>{{carinfo.year}}款{{carinfo.car_name}}</p>
         </div>
       </div>
+
+      <!-- 个人信息表单 -->
       <div class="self_info">
         <p class="tip">个人信息</p>
         <ul>
@@ -29,6 +31,8 @@
           <button>询最低价</button>
         </div>
       </div>
+
+      <!-- 经销商列表 -->
       <div class="dealer_info">
         <p class="tip">选择报价经销商</p>
         <ul>
@@ -46,7 +50,6 @@
       </div>
       <div class="supp_info"></div>
     </div>
-  </keep-alive>
 </template>
 
 <script>
@@ -55,21 +58,26 @@ import { mapState, mapActions,mapMutations } from "vuex";
 export default {
   computed:{
     ...mapState({
-      carinfo: state => state.quotation.carinfo,
-      dealerlist: state => state.quotation.dealerlist,
-      position: state => state.quotation.position,
-      currentcity: state => state.quotation.currentcity
+      carinfo: state => state.quotation.carinfo,  //sessionstrage里的汽车对象
+      dealerlist: state => state.quotation.dealerlist,//经销商列表
+      position: state => state.quotation.position,//定位
+      currentcity: state => state.quotation.currentcity//选中的下标
     })
   },
+
   methods: {
     ...mapMutations({
         showProvinec: "quotation/showProvinec",
         setCarInfo: "quotation/setCarInfo"
     }),
+
+    //展示类型
     showType(){
       this.$router.push('/type');
     }
   },
+
+  //页面初次加载就设置carinfo
   created(){
     this.setCarInfo();
   }

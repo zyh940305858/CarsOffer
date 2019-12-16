@@ -56,9 +56,10 @@ import { mapState, mapActions, mapMutations } from "vuex";
 import Color from "@/components/Img/Color/Color.vue";
 import ClassList from "@/components/Img/ClassList/ClassList.vue";
 export default {
+  // name:'van-image-preview',
   components:{
     Color,
-    ClassList  
+    ClassList,
   },
   computed:{
     imgswiperflag:{

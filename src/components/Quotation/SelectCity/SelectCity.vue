@@ -26,14 +26,15 @@ import {mapState,mapActions,mapMutations} from 'vuex';
 export default {
   computed:{
     ...mapState({
-      provineclist: state => state.quotation.provineclist,
-      cityflag: state => state.quotation.cityflag,
-      citylist: state => state.quotation.citylist,
-      position: state => state.quotation.position,
-      carinfo: state => state.quotation.carinfo,
-      currentcity: state => state.quotation.currentcity
+      provineclist: state => state.quotation.provineclist, //省市列表
+      cityflag: state => state.quotation.cityflag,//城市控制
+      citylist: state => state.quotation.citylist,//城市列表
+      position: state => state.quotation.position,//position定位
+      carinfo: state => state.quotation.carinfo,//sessioninfo的car对象
+      currentcity: state => state.quotation.currentcity//选中的城市
     })
   },
+
   methods:{
     ...mapMutations({
       hideProvinec:'quotation/hideProvinec',
@@ -42,16 +43,21 @@ export default {
       showProvinec:'quotation/showProvinec',
       setUserInfo:'quotation/setUserInfo'
     }),
+
     ...mapActions({
       getProvinecList:'quotation/getProvinecList',
       getCityList:'quotation/getCityList',
       getDealerList:'quotation/getDealerList',
       autoGetPosition:'quotation/autoGetPosition'
     }),
+
+    //展示城市页
     showCityPage(id){
       this.getCityList(id);
       this.showCity(true);
     },
+
+    //设置城市id
     async setCityId(obj){
       await this.setUserInfo(obj);
       let obj1 = {
@@ -61,6 +67,8 @@ export default {
       await this.getDealerList(obj1);
       this.hideProvinec(false);
     },
+
+    //设置城市id
     async setCityFn(pos){
       await this.setUserInfo(pos);
       let obj1 = {
@@ -71,6 +79,8 @@ export default {
       this.hideProvinec(false);
     }
   },
+
+  //加载完成前让他定位
   async created(){
     await this.autoGetPosition();
     await this.getProvinecList()

@@ -1,5 +1,7 @@
 <template>
   <div class="carlist">
+
+    <!-- 汽车年份列表 -->
     <div class="cartype">
       <span
         :class="currentindex == index ? 'active':''"
@@ -8,6 +10,8 @@
         @click="setCurrentIndex(index)"
       >{{item}}</span>
     </div>
+
+    <!-- 汽车款式列表 -->
     <div>
       <div v-for="(item,index) in currentlist" :key="index">
         <p>{{item.key}}</p>
@@ -24,6 +28,7 @@
         </ul>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -31,14 +36,18 @@
 import { mapActions,mapMutations } from "vuex";
 
 export default {
-  props: ["currentlist", "currentindex", "newarr"],
+  props: ["currentlist", "currentindex", "newarr"], //接受父组件传参
+
   methods: {
       ...mapActions({
           setCurrentIndex:'detail/setCurrentIndex'
       }),
+
       ...mapMutations({
         setCarId:'detail/setCarId'
       }),
+
+      //跳转到表单页  保存carid
       toQuotation(item){
         this.setCarId(item);
         this.$router.push('/quotation');

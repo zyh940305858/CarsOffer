@@ -22,6 +22,8 @@ export default {
       }
     }
   },
+
+  //监听arr变化函数
   watch: {
     arr: function() {
       this.$nextTick(() => {

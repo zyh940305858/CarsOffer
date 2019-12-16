@@ -3,7 +3,6 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-
 //Vuet图片懒加载  i
 import VueLazyload from 'vue-lazyload'
 
@@ -14,14 +13,13 @@ import '../node_modules/normalize.css/normalize.css'
 //自适应rem
 import '../node_modules/amfe-flexible/index.js'
 
-//vant框架
-import Vant from 'vant';
-import 'vant/lib/index.css';
-Vue.use(Vant);
+//vant引入图片预览
+import { ImagePreview } from 'vant';
+Vue.use(ImagePreview);
 
 Vue.use(VueLazyload,{
   perLoad:1.3,
-  loading:'./assets/img/loading.gif',
+  loading:require('@/assets/img/icon-brand.jpg'),
   attempt:3
 })
 

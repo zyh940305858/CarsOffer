@@ -1,14 +1,14 @@
 <template>
 <keep-alive>
   <div class="loading">
-      <img src="../../assets/img/loading.gif" alt="">
+      <img src="@/assets/img/loading.jpg" alt="">
   </div>
 </keep-alive>
 </template>
 
 <script>
 export default {
-
+  
 }
 </script>
 
