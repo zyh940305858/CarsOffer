@@ -9,7 +9,8 @@ const state = {
     carinfo:{},
     position:{},
     dealerlist:[],
-    currentcity:{}
+    currentcity:{},
+    resultflag:false
 };
 
 const mutations = {
@@ -45,6 +46,12 @@ const mutations = {
         sessionStorage.setItem('userinfo',JSON.stringify(data));
         state.currentcity = data;
         console.log(state.currentcity)
+    },
+    showResult(state,data){
+        state.resultflag = true;
+    },
+    hideResult(state,data){
+        state.resultflag = false;
     }
 };
 

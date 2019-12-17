@@ -3,11 +3,9 @@
     <ul class="content">
       <li v-for="(item,index) in detailimglist" :key="index" @click="showImgSwiper(index)">
         <img
-          :style="{
-              background:'url('+item.Url+')',
-              backgroundSize:'cover',  
-              backgroundRepeat:'no-repeat',
-              backgroundPosition:'center'}"
+          class="imgs"
+          :data-bg="item.Url"
+          :style="{backgroundImage:'url('+item.Url+')'}"
         />
       </li>
     </ul>
@@ -19,14 +17,6 @@ import BScroll from "better-scroll";
 import { mapState, mapActions, mapMutations } from "vuex";
 var timer,timeout;
 export default {
-  //创建后初始化better-Scroll
-  created() {
-    this.$nextTick(() => {
-      this.scrollinit();
-    });
-  },
-
-
   computed: {
     ...mapState({
       page: state => state.img.page, //页数
@@ -99,6 +89,13 @@ export default {
         }
       });
     }
+  },
+
+    //创建后初始化better-Scroll
+  created() {
+    this.$nextTick(() => {
+      this.scrollinit("imgs");
+    });
   }
 };
 </script>

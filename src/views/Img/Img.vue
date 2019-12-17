@@ -15,13 +15,9 @@
     <!-- 默认展示页面 -->
     <div class="img_default" v-if="imglist.length">
       <div v-for="(item,index) in imglist" :key="index">
-        <div :index="index1" v-for="(item1,index1) in item.List" :key="index1">
+        <div :index="index1" :data-bg="item.Url" v-for="(item1,index1) in item.List" :key="index1">
           <img
-            :style="{
-              background:'url('+item1.Url+')',
-              backgroundSize:'cover',  
-              backgroundRepeat:'no-repeat',
-              backgroundPosition:'center'}"
+            :style="{backgroundImage:'url('+item1.Url+')'}"
           />
           <div class="p" v-if="index1 == 0" :data-id="item.Id" @click="showDetailImg(item.Id)">
             <p>{{item.Name}}</p>

@@ -10,6 +10,7 @@
     transition: transform .2s ease,-webkit-transform .2s ease;
     -webkit-transform: translate3d(0,100%,0);
     transform: translate3d(0,100%,0);
+    -webkit-overflow-scrolling: touch;
 }
 
 .select_city .province {
@@ -82,16 +83,24 @@
     height: 100%;
     z-index: 101;
     background: rgba(0,0,0,.6);
-    visibility: hidden;
+    // visibility: hidden;
+    display none;
 }
 
 .select_city .city.active {
-    visibility: visible;
+    display: block;
 }
 
-.select_city .city.active ul {
-    -webkit-transform: translate3d(30%,0,0);
-    transform: translate3d(30%,0,0);
+
+@keyframes b {
+    0% {
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+    }
+    100% {
+        -webkit-transform: translateX(50%);
+        transform: translateX(50%);
+    }
 }
 
 .select_city .city ul {
@@ -103,7 +112,8 @@
     transform: translate3d(100%,0,0);
     transition: -webkit-transform .2s ease;
     transition: transform .2s ease;
-    transition: transform .2s ease,-webkit-transform .2s ease;
+    -webkit-animation: b .4s ease forwards;
+    animation: b .4s ease forwards;
 }
 
 .select_city .city ul li {

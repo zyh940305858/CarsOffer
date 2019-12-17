@@ -1,0 +1,79 @@
+.result {
+    position: fixed;
+    z-index: 101;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: rgba(0,0,0,.5);
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+@keyframes e {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale(.85);
+        transform: scale(.85);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+}
+
+.result .wrap {
+    -webkit-animation: e .3s ease forwards;
+    animation: e .3s ease forwards;
+    height: auto;
+    background: #fff;
+    border-radius: .266667rem;
+    padding: .4rem .4rem 0;
+    text-align: center;
+    display: inline-block;
+    width: 84%;
+    overflow: hidden;
+    img{
+        width: 1.066667rem;
+        display: block;
+        margin: 0 auto .4rem;
+    }
+    p:nth-child(2) {
+        font-size: 0.53333rem;
+        color: #3cc144;
+        margin: 0.13333rem;
+    }
+    p:nth-child(3) {
+        font-size: .32rem;
+        color: silver;
+        margin: .2rem;
+    }
+
+    div {
+        width: 120%;
+        margin-left: -10%;
+        height: 1.066666rem;
+        margin-top: .4rem;
+        border-top: 1px solid #f4f4f4;
+    }
+}
+
+.result .wrap div button:last-child div button {
+    border: none;
+    width: 50%;
+    background: transparent;
+    line-height: 1.066666rem;
+    padding: 0;
+    color: silver;
+}
+
+.result .wrap div button:last-child {
+    font-size: .4rem;
+    box-sizing: border-box;
+    color: #3aacff;
+}

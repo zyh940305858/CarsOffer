@@ -35,6 +35,8 @@ html {
 html,body,#app
   width 100%
   height 100%
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility:hidden;
   -webkit-animation: a .4s ease forwards;
   animation: a .4s ease forwards;
 #app {
@@ -59,6 +61,8 @@ html,body,#app
 #app>.home,.detail,.img,.q {
     width: 100%;
     height 100%;
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility:hidden;
     -webkit-animation: a .2s ease forwards;
     animation: a .2s ease forwards;
 }
