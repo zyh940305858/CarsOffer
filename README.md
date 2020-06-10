@@ -1,7 +1,7 @@
-# 仿车轮网项目(M站)
+# 汽车报价项目(M站)
 
 ## 技术栈
-    vue4.X + vue-router + vuex + Vant + Eslint + ES6 + axios
+    vue + vue-router + vuex + Vant + Eslint + ES6 + axios
 
 ## 技术点
 - 数据的重构、去重
